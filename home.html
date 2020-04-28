@@ -5,8 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COVID-19</title>
 
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Counter Up -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.0/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+
+    <!-- Chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+    <!-- Home -->
+    <script src="js/home.js"></script>
+
+    <style>
+      .blue-border {
+        border-left: 5px solid rgba(0, 0, 255, 0.5);
+      }
+
+      .green-border {
+        border-left: 5px solid rgba(0, 255, 0, 0.5);
+      }
+
+      .red-border {
+        border-left: 5px solid rgba(255, 0, 0, 0.5);
+      }
+
+      .counter {
+        font-size: 30px;
+      }
+
+    </style>
+
 </head>
 <body>
     
@@ -34,14 +72,77 @@
     </nav>
 
     <div class="container">
-        <h1>HOME</h1>
+      
+      <div class="card  mt-5">
+        <div class="card-body">
+          
+          <div class="d-flex justify-content-center">
+            <h1 class="text-center">Coronavirus Pandemic Overview</h1>
+          </div>
+          
+          <div class="d-flex justify-content-center mt-2">
+            <h6 class="card-subtitle text-muted last-update">-</h6>
+          </div>
+          
+          <hr>
+    
+          <div class="row d-flex justify-content-around mb-4">
+            
+            <div class="card col-lg-3 mt-4 p-0 mx-3">
+              <div class="card-body blue-border">
+                <h6 class="text-secondary">Infected</h6>
+                <p id="confirmed" class="counter">0</p>
+                <footer class="blockquote-footer">Number of infected people by Coronavirus</footer>
+              </div>
+            </div>
+    
+            <div class="card col-lg-3 mt-4 p-0 mx-3">
+              <div class="card-body green-border">
+                <h6 class="text-secondary">Recovered</h6>
+                <p id="recovered" class="counter">0</p>
+                <footer class="blockquote-footer">Number of recovered people from Coronavirus</footer>
+              </div>
+            </div>
+    
+            <div class="card col-lg-3 mt-4 p-0 mx-3">
+              <div class="card-body red-border">
+                <h6 class="text-secondary">Deaths</h6>
+                <p id="deaths" class="counter">0</p>
+                <footer class="blockquote-footer">Number of deaths caused by Coronavirus</footer>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+        <br>
+
+      <div class="card mt-5 mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-center ">
+            <h1 class="text-center">Total COVID-19 confirmed cases and deaths</h1>
+          </div>
+          
+          <hr>
+
+          <div>
+            <canvas id="coronaChart" class="mb-4"></canvas>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="my-5">
+          <h6 class="card-subtitle mb-2 text-muted">
+              api source : <a href="https://covid19.mathdro.id/api" target="_blank">https://covid19.mathdro.id/api</a>
+          </h6>
+          <h6 class="card-subtitle mb-2 text-muted">
+            teached & inspired by : <a href="https://www.youtube.com/watch?v=khJlrj3Y6Ls&t=8s">https://www.youtube.com/watch?v=khJlrj3Y6Ls&t=8s</a>
+          </h6>
+      </div>
     </div>
 
-
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
+  </body>
 </html>
