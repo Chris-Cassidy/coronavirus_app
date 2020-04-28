@@ -1,8 +1,7 @@
-console.log('HOME');
-
 const url = 'https://covid19.mathdro.id/api';
 
 fetchData();
+
 fetchDailyData();
 
 async function fetchData () {
@@ -27,22 +26,7 @@ async function fetchData () {
             time: 1000,
             offset: 70,
             beginAt: 100,
-            // formatter: function (n) {
-            //   return n.replace(/,/g, '.');
-            // }
         });
-
-        // let selectedChart = document.getElementById('coronaChart').getContext('2d');
-        
-        // let coronaChart = new Chart(selectedChart, {
-        //     type:'line',
-        //     data: {
-        //         labels:
-        //     },
-        //     options: {
-
-        //     },
-        // })
     } catch (error) {
         console.log(error);
     }
@@ -59,8 +43,7 @@ async function fetchDailyData() {
         }));
 
         let selectedChart = document.getElementById('coronaChart').getContext('2d');
-        
-        // Chart.defaults.global.defaultFontFamily = 'Lato';
+
         Chart.defaults.global.defaultFontSize = 18;
         Chart.defaults.global.defaultFontColor = '#777';
 
@@ -81,13 +64,6 @@ async function fetchDailyData() {
                     fill: true,
                 }],
             },
-            // options: {
-            //     title: {
-            //         display: true,
-            //         text: 'Coronavirus Chart',
-            //         fontSize: 30,
-            //     },
-            // }
         });
     } catch (error) {
         console.log(error);

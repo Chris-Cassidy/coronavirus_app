@@ -22,6 +22,20 @@
 
 - Make the chart (DONE)
 
-- 
+- Show google maps in map.html (DONE)
+
+- Show 1 marker in map.html (DONE)
+
+- Test API that will be used (DONE)
+
+- Show Countries marker (DONE)
+
+- Show detail info of each country (DONE)
+
+- Re-design the google maps info window (DONE)
+
+- Cleaning map.html
+
+
 
 
