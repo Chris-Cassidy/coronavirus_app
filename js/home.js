@@ -58,7 +58,7 @@ async function fetchDailyData() {
                     fill: true,
                 }, {
                     data: simplifiedData.map(({ deaths }) => deaths),
-                    label: 'Deaths',
+                    label: 'Death',
                     borderColor: 'red',
                     backgroundColor: 'rgba(255, 0, 0, 0, 2.5)',
                     fill: true,

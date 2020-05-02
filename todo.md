@@ -34,8 +34,6 @@
 
 - Re-design the google maps info window (DONE)
 
-- Cleaning map.html
+- Cleaning map.html (DONE)
 
-
-
-
+- Stylin the maps (DONE)
