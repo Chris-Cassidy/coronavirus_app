@@ -42,9 +42,9 @@
 
 - Change the API to corona.lmao.ninja's API (DONE) 
 
-- Make another branch called 'learning' and commit these changes to that branch !!!Important!!!
+- Make another branch called 'learning' and commit these changes to that branch (DONE)
 
-- Push it to GitHub
+- Push it to GitHub (DONE)
 
 - Re-construct your wireframes.
 
