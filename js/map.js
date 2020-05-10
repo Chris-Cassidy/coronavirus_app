@@ -1,4 +1,4 @@
-const url = "https://www.trackcorona.live/api/countries";
+const url = "https://corona.lmao.ninja/v2/countries";
 
 var map;
 var markers = [];
@@ -8,8 +8,8 @@ async function initMap() {
 
     try {
         var indonesia = {
-            lat: -0.789275,
-            lng: 113.921327,
+            lat: -5,
+            lng: 120,
         }
     
         map = new google.maps.Map(
@@ -252,7 +252,7 @@ async function initMap() {
                 ]
         });
   
-        const { data : {data} } = await axios.get(url);
+        const { data } = await axios.get(url);
                 
         infoWindow = new google.maps.InfoWindow();
 
@@ -262,20 +262,19 @@ async function initMap() {
     }
 }
 
-function showCountriesMarkers(datas) {
+function showCountriesMarkers(data) {
     var bounds = new google.maps.LatLngBounds();
 
-    for(var [index, data] of datas.entries()){
+    for(var i = 0; i < data.length; i++) {
         var latlng = new google.maps.LatLng(
-            data.latitude,
-            data.longitude,
+            data[i]['countryInfo']['lat'],
+            data[i]['countryInfo']['long'],
         );
-        
-        var location = data.location;
-        var confirmed = data.confirmed;
-        var recovered = data.recovered;
-        var dead = data.dead;
-        var lastUpdate = new Date(data.updated).toDateString();
+        var location = data[i]['country'];
+        var confirmed = data[i]['cases'];
+        var recovered = data[i]['recovered'];
+        var dead = data[i]['deaths'];
+        var lastUpdate = new Date(data[i]['updated']).toDateString();
         bounds.extend(latlng);
         createMarker(latlng, location, confirmed, recovered, dead, lastUpdate);
     }
@@ -338,5 +337,12 @@ function createMarker(latlng, location, confirmed, recovered, dead, lastUpdate) 
         infoWindow.open(map, marker);  
     });
 
+    // google.maps.event.addListener(marker, 'mouseout', function() {
+    //     // infoWindow.setContent(html);
+    //     // infoWindow.open(map, marker);  
+    //     infoWindow.close();
+    // });
+
     markers.push(marker);
 }
+

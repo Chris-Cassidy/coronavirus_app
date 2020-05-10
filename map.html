@@ -89,7 +89,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <!-- <div class="container">
       <div class="d-flex justify-content-center mt-5">
         <h1 class="text-center">Coronavirus Map to Show Each Country's Condition</h1>
       </div>
@@ -98,16 +98,27 @@
         <h6 class="card-subtitle text-muted last-update">Tap the markers on the map to see more detailed informations!</h6>
       </div>
 
-      <div id="map" style="width: 100%; height: 600px;" class="my-4"></div>
+      <div id="map" style="width: 100%; height: 600px;"></div>
       
       <div class="my-5">
         <h6 class="card-subtitle mb-2 text-muted">
             api source : <a href="https://www.trackcorona.live/api/countries" target="_blank">https://www.trackcorona.live/api/countries</a>
         </h6>
       </div>
-    </div>
-    
+    </div> -->
 
+    <div id="map" style="width: 100%; height: 600px;"></div>
+    <div id="map-info" style="width: 100%; height: 300px;" class="d-flex justify-content-center align-items-center">
+      <h1>Map Info (Soon...)</h1>
+    </div>
+
+    <div class="container">
+      <div class="my-5">
+        <h6 class="card-subtitle mb-2 text-muted">
+            api source : <a href="https://corona.lmao.ninja/v2/countries" target="_blank">https://corona.lmao.ninja/v2/countries</a>
+        </h6>
+      </div>
+    </div>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlkODouotm0Vule8S0iiXIcPCcSJtZj8s&callback=initMap">
     </script>
