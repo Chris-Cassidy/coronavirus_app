@@ -46,10 +46,10 @@
 
 - Push it to GitHub (DONE)
 
-- Re-construct your wireframes.
+- Re-construct your wireframes. (DONE)
 
 - SRS pt1 - Make all the 'User Flow Diagram'
 
-- SRS pt2 - Search about Business Requirements and Put it into the SRS
+- SRS pt2 - Search about Business Requirements and Put it into the SRS (DONE)
 
-- SRS pt3 - Search about Technical Requirements and Put it into the SRS
+- SRS pt3 - Search about Technical Requirements and Put it into the SRS (DONE)

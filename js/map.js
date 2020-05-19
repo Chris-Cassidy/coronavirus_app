@@ -1,348 +1,444 @@
 const url = "https://corona.lmao.ninja/v2/countries";
 
+window.onload = () => {
+    getCountryData();
+}
+
 var map;
-var markers = [];
 var infoWindow;
 
-async function initMap() {
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8,
+    });
 
-    try {
-        var indonesia = {
-            lat: -5,
-            lng: 120,
+    infoWindow = new google.maps.InfoWindow();
+}
+
+const getCountryData = () => {
+    fetch(url)
+    .then((response) => {
+        return response.json();
+    }).then((data) => {
+        showDataOnMap(data);
+        showDataInTable(data);
+    });
+}
+
+const showDataOnMap = (data) => {
+    data.map((country) => {
+        let countryCenter = {
+            lat: country.countryInfo.lat, 
+            lng: country.countryInfo.long,
         }
-    
-        map = new google.maps.Map(
-            document.getElementById('map'), {
-                center: indonesia,
-                zoom: 5,
-                mapTypeId: 'roadmap',
-                styles: [
-                    {
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                        "color": "#1d2c4d"
-                        }
-                    ]
-                    },
-                    {
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#8ec3b9"
-                        }
-                    ]
-                    },
-                    {
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                        "color": "#1a3646"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "administrative.country",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                        "color": "#4b6878"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "administrative.land_parcel",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#64779e"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "administrative.province",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                        "color": "#4b6878"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "landscape.man_made",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                        "color": "#334e87"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "landscape.natural",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                        "color": "#023e58"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "poi",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                        "color": "#283d6a"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "poi",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#6f9ba5"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "poi",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                        "color": "#1d2c4d"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "poi.park",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                        "color": "#023e58"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "poi.park",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#3C7680"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "road",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                        "color": "#304a7d"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "road",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#98a5be"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "road",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                        "color": "#1d2c4d"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "road.highway",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                        "color": "#2c6675"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "road.highway",
-                    "elementType": "geometry.stroke",
-                    "stylers": [
-                        {
-                        "color": "#255763"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "road.highway",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#b0d5ce"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "road.highway",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                        "color": "#023e58"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "transit",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#98a5be"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "transit",
-                    "elementType": "labels.text.stroke",
-                    "stylers": [
-                        {
-                        "color": "#1d2c4d"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "transit.line",
-                    "elementType": "geometry.fill",
-                    "stylers": [
-                        {
-                        "color": "#283d6a"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "transit.station",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                        "color": "#3a4762"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "water",
-                    "elementType": "geometry",
-                    "stylers": [
-                        {
-                        "color": "#0e1626"
-                        }
-                    ]
-                    },
-                    {
-                    "featureType": "water",
-                    "elementType": "labels.text.fill",
-                    "stylers": [
-                        {
-                        "color": "#4e6d70"
-                        }
-                    ]
-                    }
-                ]
+
+        var countryCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: countryCenter,
+            radius: country.casesPerOneMillion * 15
         });
-  
-        const { data } = await axios.get(url);
-                
-        infoWindow = new google.maps.InfoWindow();
+        
+        var html = `
+            <div class="info-container">
+                <div class="info-flag" style="background-image: url(${country.countryInfo.flag});">
+                </div>
+                <div class="info-name">                
+                    ${country.country}
+                </div>
+                <div class="info-confirmed">
+                    Total : ${country.cases}
+                </div>
+                <div class="info-recovered">
+                    Recovered : ${country.recovered}
+                </div>
+                <div class="info-deaths">
+                    Deaths : ${country.deaths}
+                </div>
+            </div>
+        `;
 
-        showCountriesMarkers(data);
-    } catch (error) {
-        console.log(error);
-    }
+        var infoWindow = new google.maps.InfoWindow({
+            content: html,
+            position: countryCircle.center,
+        });
+
+        google.maps.event.addListener(countryCircle, 'mouseover', function() {
+            infoWindow.open(map);
+        });
+
+        google.maps.event.addListener(countryCircle, 'mouseout', function() {
+            infoWindow.close();
+        });
+    });
+
 }
 
-function showCountriesMarkers(data) {
-    var bounds = new google.maps.LatLngBounds();
+const showDataInTable = (data) => {
+    var html = '';
+    data.forEach((country) => {
+        html += `
+            <tr>
+                <td>${country.country}</td>
+                <td>${country.cases}</td>
+                <td>${country.recovered}</td>
+                <td>${country.deaths}</td>
+            </tr>
+        `;
+    })
 
-    for(var i = 0; i < data.length; i++) {
-        var latlng = new google.maps.LatLng(
-            data[i]['countryInfo']['lat'],
-            data[i]['countryInfo']['long'],
-        );
-        var location = data[i]['country'];
-        var confirmed = data[i]['cases'];
-        var recovered = data[i]['recovered'];
-        var dead = data[i]['deaths'];
-        var lastUpdate = new Date(data[i]['updated']).toDateString();
-        bounds.extend(latlng);
-        createMarker(latlng, location, confirmed, recovered, dead, lastUpdate);
-    }
+    document.getElementById('table-data').innerHTML = html;
 }
+// const url = "https://corona.lmao.ninja/v2/countries";
 
-function createMarker(latlng, location, confirmed, recovered, dead, lastUpdate) {
-    var html = `
-        <div class="country-window-container">
-            <h2>${location}</h2>
-            ${lastUpdate}
-            <hr>
-            <div class="row m-2">
-                <div class="col-6 d-flex align-items-center p-0">
-                    <div id="infected" class="circle">
-                        <i class="fas fa-virus"></i>
-                    </div>
-                    <span class="info-title">Infected</span>
-                </div>
-                <div class="col-6 d-flex align-items-center p-0">
-                    <span class="info-content">${confirmed}</span>
-                </div>
-            </div>
-            
-            <div class="row m-2">
-                <div class="col-6 d-flex align-items-center p-0">
-                    <div id="recovered" class="circle">
-                        <i class="fas fa-briefcase-medical"></i>    
-                    </div>
-                    <span class="info-title">Recovered</span>
-                </div>
-                <div class="col-6 d-flex align-items-center p-0">
-                    <span class="info-content">${recovered}</span>
-                </div>
-            </div>
+// var map;
+// var markers = [];
+// var infoWindow;
 
-            <div class="row m-2">
-                <div class="col-6 d-flex align-items-center p-0">
-                    <div id="death" class="circle">
-                        <i class="fas fa-skull-crossbones"></i>
-                    </div>
-                    <span class="info-title">Death</span>
-                </div>
-                <div class="col-6 d-flex align-items-center p-0">
-                    <span class="info-content">${dead}</span>
-                </div>
-            </div>
-        </div>
-    `;
+// async function initMap() {
+
+//     try {
+//         var indonesia = {
+//             lat: -5,
+//             lng: 120,
+//         }
     
-    var markerIcon = "http://maps.google.com/mapfiles/kml/paddle/wht-circle.png";
+//         map = new google.maps.Map(
+//             document.getElementById('map'), {
+//                 center: indonesia,
+//                 zoom: 5,
+//                 mapTypeId: 'roadmap',
+//                 styles: [
+//                     {
+//                     "elementType": "geometry",
+//                     "stylers": [
+//                         {
+//                         "color": "#1d2c4d"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#8ec3b9"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "elementType": "labels.text.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#1a3646"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "administrative.country",
+//                     "elementType": "geometry.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#4b6878"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "administrative.land_parcel",
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#64779e"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "administrative.province",
+//                     "elementType": "geometry.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#4b6878"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "landscape.man_made",
+//                     "elementType": "geometry.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#334e87"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "landscape.natural",
+//                     "elementType": "geometry",
+//                     "stylers": [
+//                         {
+//                         "color": "#023e58"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "poi",
+//                     "elementType": "geometry",
+//                     "stylers": [
+//                         {
+//                         "color": "#283d6a"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "poi",
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#6f9ba5"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "poi",
+//                     "elementType": "labels.text.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#1d2c4d"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "poi.park",
+//                     "elementType": "geometry.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#023e58"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "poi.park",
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#3C7680"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "road",
+//                     "elementType": "geometry",
+//                     "stylers": [
+//                         {
+//                         "color": "#304a7d"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "road",
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#98a5be"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "road",
+//                     "elementType": "labels.text.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#1d2c4d"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "road.highway",
+//                     "elementType": "geometry",
+//                     "stylers": [
+//                         {
+//                         "color": "#2c6675"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "road.highway",
+//                     "elementType": "geometry.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#255763"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "road.highway",
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#b0d5ce"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "road.highway",
+//                     "elementType": "labels.text.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#023e58"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "transit",
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#98a5be"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "transit",
+//                     "elementType": "labels.text.stroke",
+//                     "stylers": [
+//                         {
+//                         "color": "#1d2c4d"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "transit.line",
+//                     "elementType": "geometry.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#283d6a"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "transit.station",
+//                     "elementType": "geometry",
+//                     "stylers": [
+//                         {
+//                         "color": "#3a4762"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "water",
+//                     "elementType": "geometry",
+//                     "stylers": [
+//                         {
+//                         "color": "#0e1626"
+//                         }
+//                     ]
+//                     },
+//                     {
+//                     "featureType": "water",
+//                     "elementType": "labels.text.fill",
+//                     "stylers": [
+//                         {
+//                         "color": "#4e6d70"
+//                         }
+//                     ]
+//                     }
+//                 ]
+//         });
+  
+//         const { data } = await axios.get(url);
+                
+//         infoWindow = new google.maps.InfoWindow();
 
-    var marker = new google.maps.Marker({
-        map: map,
-        position: latlng,
-        icon: markerIcon,
-    });
+//         showCountriesMarkers(data);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 
-    google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent(html);
-        infoWindow.open(map, marker);  
-    });
+// function showCountriesMarkers(data) {
+//     var bounds = new google.maps.LatLngBounds();
 
-    // google.maps.event.addListener(marker, 'mouseout', function() {
-    //     // infoWindow.setContent(html);
-    //     // infoWindow.open(map, marker);  
-    //     infoWindow.close();
-    // });
+//     for(var i = 0; i < data.length; i++) {
+//         var latlng = new google.maps.LatLng(
+//             data[i]['countryInfo']['lat'],
+//             data[i]['countryInfo']['long'],
+//         );
+//         var location = data[i]['country'];
+//         var confirmed = data[i]['cases'];
+//         var recovered = data[i]['recovered'];
+//         var dead = data[i]['deaths'];
+//         var lastUpdate = new Date(data[i]['updated']).toDateString();
+//         bounds.extend(latlng);
+//         createMarker(latlng, location, confirmed, recovered, dead, lastUpdate);
+//     }
+// }
 
-    markers.push(marker);
-}
+// function createMarker(latlng, location, confirmed, recovered, dead, lastUpdate) {
+//     var html = `
+//         <div class="country-window-container">
+//             <h2>${location}</h2>
+//             ${lastUpdate}
+//             <hr>
+//             <div class="row m-2">
+//                 <div class="col-6 d-flex align-items-center p-0">
+//                     <div id="infected" class="circle">
+//                         <i class="fas fa-virus"></i>
+//                     </div>
+//                     <span class="info-title">Infected</span>
+//                 </div>
+//                 <div class="col-6 d-flex align-items-center p-0">
+//                     <span class="info-content">${confirmed}</span>
+//                 </div>
+//             </div>
+            
+//             <div class="row m-2">
+//                 <div class="col-6 d-flex align-items-center p-0">
+//                     <div id="recovered" class="circle">
+//                         <i class="fas fa-briefcase-medical"></i>    
+//                     </div>
+//                     <span class="info-title">Recovered</span>
+//                 </div>
+//                 <div class="col-6 d-flex align-items-center p-0">
+//                     <span class="info-content">${recovered}</span>
+//                 </div>
+//             </div>
+
+//             <div class="row m-2">
+//                 <div class="col-6 d-flex align-items-center p-0">
+//                     <div id="death" class="circle">
+//                         <i class="fas fa-skull-crossbones"></i>
+//                     </div>
+//                     <span class="info-title">Death</span>
+//                 </div>
+//                 <div class="col-6 d-flex align-items-center p-0">
+//                     <span class="info-content">${dead}</span>
+//                 </div>
+//             </div>
+//         </div>
+//     `;
+    
+//     var markerIcon = "http://maps.google.com/mapfiles/kml/paddle/wht-circle.png";
+
+//     var marker = new google.maps.Marker({
+//         map: map,
+//         position: latlng,
+//         icon: markerIcon,
+//     });
+
+//     google.maps.event.addListener(marker, 'click', function() {
+//         infoWindow.setContent(html);
+//         infoWindow.open(map, marker);  
+//     });
+
+//     // google.maps.event.addListener(marker, 'mouseout', function() {
+//     //     // infoWindow.setContent(html);
+//     //     // infoWindow.open(map, marker);  
+//     //     infoWindow.close();
+//     // });
+
+//     markers.push(marker);
+// }
 
