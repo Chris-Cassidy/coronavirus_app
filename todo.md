@@ -37,3 +37,19 @@
 - Cleaning map.html (DONE)
 
 - Stylin the maps (DONE)
+
+- Re-construct the map.js (DONE)
+
+- Change the API to corona.lmao.ninja's API (DONE) 
+
+- Make another branch called 'learning' and commit these changes to that branch (DONE)
+
+- Push it to GitHub (DONE)
+
+- Re-construct your wireframes. (DONE)
+
+- SRS pt1 - Make all the 'User Flow Diagram'
+
+- SRS pt2 - Search about Business Requirements and Put it into the SRS (DONE)
+
+- SRS pt3 - Search about Technical Requirements and Put it into the SRS (DONE)
