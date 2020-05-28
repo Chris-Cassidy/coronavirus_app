@@ -64,6 +64,15 @@ async function fetchDailyData() {
                     fill: true,
                 }],
             },
+            options: {
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            maxTicksLimit: 10
+                        }
+                    }]
+                }
+            }
         });
     } catch (error) {
         console.log(error);

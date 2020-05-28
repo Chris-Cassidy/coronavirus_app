@@ -10,48 +10,6 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- <style>
-      .country-window-container {
-        min-width: 300px;
-        padding: 10px;
-      }
-
-      .info-title {
-        color: #777;
-        font-size: 18px;
-        margin-left: 10px;
-      }
-
-      .info-content {
-        color: black;
-        font-size: 20px;
-        padding-left: 20px;
-        font-weight: bold;
-      }
-
-      .circle {
-        display: flex;
-        height: 25px;
-        width: 25px;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        border-radius: 70%;
-      }
-
-      #infected {
-        background-color: #1985A1;
-      }
-
-      #recovered {
-        background-color: springgreen;
-      }
-
-      #death {
-        background-color: tomato;
-      }
-
-    </style> -->
 
 </head>
 <body>
@@ -118,10 +76,9 @@
 
     </div>
 
-    <div class="data-chart">
-
-      
-    </div>
+    <!-- <div class="data-chart container mt-5">
+      <canvas id="corona-chart" class="mb-4"></canvas>
+    </div> -->
 
     <div class="container">
       <div class="my-5">
@@ -131,24 +88,28 @@
       </div>
     </div>
 
-    <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
 
-    <!-- Axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- Axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <!-- Chart Js -->
-    <script src="https://cdnjs.com/libraries/Chart.js"></script>
-
-    <!-- Map -->
-    <script src="js/map.js"></script>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlkODouotm0Vule8S0iiXIcPCcSJtZj8s&callback=initMap">
-    </script>
+  <!-- Chart -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  
+  <!-- Numeral -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  
+  <!-- Map -->
+  <script src="js/map.js"></script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlkODouotm0Vule8S0iiXIcPCcSJtZj8s&callback=initMap">
+  </script>
 
 </body>
+</html>
