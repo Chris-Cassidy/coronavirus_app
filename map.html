@@ -11,6 +11,18 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
 
+    <style>
+      html {
+        overflow:   scroll;
+      }
+
+      ::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+        background: transparent;
+      }
+    </style>
+
 </head>
 <body>
     
@@ -36,7 +48,10 @@
           </ul>
         </div>
     </nav>
+    <div style="width: 100%; height: 100%;"> 
 
+      <div id="map" style="width: 100%; height: 100vh;"></div>
+    </div>
     <!-- <div class="container">
       <div class="d-flex justify-content-center mt-5">
         <h1 class="text-center">Coronavirus Map to Show Each Country's Condition</h1>
@@ -46,7 +61,7 @@
         <h6 class="card-subtitle text-muted last-update">Tap the markers on the map to see more detailed informations!</h6>
       </div>
 
-      <div id="map" style="width: 100%; height: 600px;"></div>
+      
       
       <div class="my-5">
         <h6 class="card-subtitle mb-2 text-muted">
@@ -55,7 +70,7 @@
       </div>
     </div> -->
 
-    <div id="map" style="width: 100%; height: 600px;"></div>
+    <!-- <div id="map" style="width: 100%; height: 600px;"></div>
     
     <div class="data-info">
 
@@ -74,19 +89,19 @@
         </table>
       </div>
 
-    </div>
+    </div> -->
 
     <!-- <div class="data-chart container mt-5">
       <canvas id="corona-chart" class="mb-4"></canvas>
     </div> -->
 
-    <div class="container">
+    <!-- <div class="container">
       <div class="my-5">
         <h6 class="card-subtitle mb-2 text-muted">
             api source : <a href="https://corona.lmao.ninja/v2/countries" target="_blank">https://corona.lmao.ninja/v2/countries</a>
         </h6>
       </div>
-    </div>
+    </div> -->
 
   <!-- Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

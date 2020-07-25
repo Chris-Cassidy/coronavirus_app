@@ -13,9 +13,9 @@ async function fetchData () {
         let deathsElement = document.getElementById('deaths');
         let lastUpdateElements = document.getElementsByClassName('last-update');
         
-        confirmedElement.innerHTML = confirmed.value;
-        recoveredElement.innerHTML = recovered.value;
-        deathsElement.innerHTML = deaths.value;
+        confirmedElement.innerHTML = formatNumber(confirmed.value);
+        recoveredElement.innerHTML = formatNumber(recovered.value);
+        deathsElement.innerHTML = formatNumber(deaths.value);
         
         for (var i = 0; i < lastUpdateElements.length; i++) {
             lastUpdateElements[i].innerHTML = 'Last Update: ' + new Date(lastUpdate).toDateString();
@@ -79,4 +79,7 @@ async function fetchDailyData() {
     }
 }
 
+function formatNumber(number) {
+    return numeral(number).format('0,0');
+} 
 
